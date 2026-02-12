@@ -352,6 +352,16 @@
       text-transform:uppercase;
       font-weight:700;
     }
+.scHidden{
+  position:absolute;
+  left:-9999px;
+  top:-9999px;
+  width:1px;
+  height:1px;
+  opacity:0;
+  pointer-events:none;
+}
+</style>
   </style>
 </head>
 
@@ -505,32 +515,27 @@
       </div>
 
       <!-- Player SoundCloud (se muestra al primer toque) -->
-      <div id="playerBox" style="max-width:420px;margin:14px auto;display:none;">
-        <iframe
-          id="scPlayer"
-          width="100%"
-          height="166"
-          scrolling="no"
-          frameborder="no"
-          allow="autoplay">
-        </iframe>
-      </div>
+<div id="playerBox" class="scHidden">
+  <iframe
+    id="scPlayer"
+    width="1"
+    height="1"
+    scrolling="no"
+    frameborder="no"
+    allow="autoplay">
+  </iframe>
+</div>
 
       <div class="table" id="songTable">
         <div class="row head">
-          <div>Canción</div><div>Artista</div><div>Escuchar</div>
+          <div>Canción</div><div>Artista</div>
         </div>
 
         <div class="row songRow" data-link="https://www.youtube.com/watch?v=CWsytZ_n2FQ">
           <div>James</div><div><em>Ed Sheeran</em></div>
-          <button class="iconBtn playBtn" type="button">▶</button>
         </div>
 
-        <div class="row songRow" data-link="https://www.youtube.com/watch?v=aHxYwaZM-KA">
-          <div>The night we met</div><div><em>John Legend</em></div>
-          <button class="iconBtn playBtn" type="button">▶</button>
-        </div>
-      </div>
+    
 
       <div class="addSong">
         <div class="inline">
@@ -720,7 +725,7 @@
 
       const trackUrl = "https://soundcloud.com/robertmorr/robert-morr-x-aga-tenia-tanto-from-desire-2022-mashup-1";
       scFrame.src = makeSoundCloudEmbed(trackUrl);
-      playerBox.style.display = "block";
+
 
       widget = SC.Widget(scFrame);
       widget.bind(SC.Widget.Events.READY, function () {
