@@ -860,17 +860,19 @@ let started = false;
 
 function startMusic(){
   if(started) return;
-
   started = true;
 
-  musicPlayer.src =
-    "https://www.youtube.com/embed/aHxYwaZM-KA?autoplay=1";
+  const spotifyLink =
+    "https://open.spotify.com/embed/track/5yJaXWIErrrsjQ3J0eR5aK";
+
+  musicPlayer.src = spotifyLink;
+
+  playerBox.style.display = "block";
 
   document.removeEventListener("click", startMusic);
   document.removeEventListener("touchstart", startMusic);
 }
 
-// Primer toque en cualquier sitio
 document.addEventListener("click", startMusic);
 document.addEventListener("touchstart", startMusic);
     
