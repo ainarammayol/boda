@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Nuestra boda</title>
 
-  <!-- Fuentes parecidas al estilo de la captura -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -25,17 +24,16 @@
 
     *{box-sizing:border-box}
     body{
-  margin:0;
-  padding:0;
-  width:100%;
-  overflow-x:hidden;
-  font-family: Arial, sans-serif;
-  background:#6b2434;
-  color:white;
-  text-align:center;
-}
+      margin:0;
+      padding:0;
+      width:100%;
+      overflow-x:hidden;
+      font-family: Arial, sans-serif;
+      background:#6b2434;
+      color:white;
+      text-align:center;
+    }
 
-    /* Contenedor móvil */
     .wrap{
       max-width:var(--max);
       margin:0 auto;
@@ -43,52 +41,13 @@
       min-height:100vh;
     }
 
-    /* Header tipo “modal” con X */
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:10;
-      height:54px;
-      background:rgba(246,241,234,.85);
-      backdrop-filter: blur(8px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-bottom:1px solid rgba(0,0,0,.04);
-    }
-    .topbar .domain{
-      font-size:14px;
-      color:#555;
-      letter-spacing:.02em;
-    }
-    .close{
-      position:absolute;
-      right:14px;
-      width:44px;
-      height:44px;
-      border-radius:999px;
-      border:0;
-      background:rgba(0,0,0,.65);
-      color:#fff;
-      font-size:22px;
-      line-height:1;
-      cursor:pointer;
-    }
-
-    /* Secciones */
     .section{
       padding:26px 18px;
       text-align:center;
     }
-    .section.white{
-      background:var(--paper);
-    }
-    .section.wine{
-      background:var(--wine);
-      color:#fff;
-    }
+    .section.white{ background:var(--paper); }
+    .section.wine{ background:var(--wine); color:#fff; }
 
-    /* Portada */
     .hero{
       min-height: calc(100vh - 54px);
       background:var(--wine);
@@ -151,7 +110,6 @@
       font-size:13px;
     }
 
-    /* Títulos estilo captura */
     .h2{
       font-family:"Great Vibes", cursive;
       font-size:52px;
@@ -166,17 +124,12 @@
     }
     .subtitle.white{ color:rgba(255,255,255,.85); }
 
-    /* Decoración tipo “lazo” */
     .doodleRow{
       display:flex;
       justify-content:center;
       margin:10px 0 12px;
     }
-    .doodle{
-      width:180px;
-      height:28px;
-      opacity:.9;
-    }
+    .doodle{ width:180px; height:28px; opacity:.9; }
     .doodle path{
       stroke: currentColor;
       stroke-width:3;
@@ -185,34 +138,6 @@
       stroke-linejoin:round;
     }
 
-    /* Tarjetas “marco ondulado” */
-    .card{
-      position:relative;
-      border:2px solid var(--wine2);
-      border-radius:var(--radius);
-      padding:22px 18px;
-      background:#fff;
-      margin:14px auto;
-      max-width:420px;
-    }
-    .card.soft{
-      background: #fbf7f2;
-    }
-    .label{
-      margin:8px 0 4px;
-      font-size:12px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      color:var(--muted);
-      font-weight:700;
-    }
-    .value{
-      margin:0;
-      font-family:"Cormorant Garamond", serif;
-      font-size:18px;
-      color:#5f1f2e;
-      font-weight:600;
-    }
     .btn{
       display:inline-block;
       margin-top:14px;
@@ -225,12 +150,8 @@
       border:0;
       cursor:pointer;
     }
-    .btnWide{
-      width:100%;
-      display:block;
-    }
+    .btnWide{ width:100%; display:block; }
 
-    /* Flip cards (pulsas y gira) */
     .flipGrid{ display:grid; gap:14px; }
     .flipCard{
       border:0;
@@ -261,7 +182,6 @@
     }
     .flipBack{ transform: rotateY(180deg); }
 
-    /* RSVP */
     .form{
       max-width:420px;
       margin:0 auto;
@@ -288,16 +208,8 @@
     textarea{ border-radius:18px; }
     .status{ margin-top:10px; color:var(--muted); font-size:12px; }
 
-    /* Preguntas */
-    .qa{
-      max-width:420px;
-      margin:0 auto;
-      text-align:left;
-    }
-    details{
-      border-top:2px solid rgba(255,255,255,.55);
-      padding:14px 0;
-    }
+    .qa{ max-width:420px; margin:0 auto; text-align:left; }
+    details{ border-top:2px solid rgba(255,255,255,.55); padding:14px 0; }
     details:last-child{ border-bottom:2px solid rgba(255,255,255,.55); }
     summary{
       list-style:none;
@@ -309,13 +221,7 @@
       padding-right:28px;
     }
     summary::-webkit-details-marker{ display:none; }
-    summary::after{
-      content:"+";
-      position:absolute;
-      right:0;
-      top:0;
-      font-weight:800;
-    }
+    summary::after{ content:"+"; position:absolute; right:0; top:0; font-weight:800; }
     details[open] summary::after{ content:"–"; }
     .answer{
       margin-top:10px;
@@ -324,7 +230,6 @@
       font-size:14px;
     }
 
-    /* Lista de canciones */
     .searchBox{
       max-width:420px;
       margin:0 auto 14px;
@@ -395,7 +300,6 @@
       gap:10px;
     }
 
-    /* Galería */
     .drop{
       max-width:420px;
       margin:0 auto;
@@ -421,7 +325,6 @@
       border:1px solid rgba(0,0,0,.06);
     }
 
-    /* Cuenta atrás */
     .countWrap{
       display:flex;
       flex-direction:column;
@@ -441,10 +344,8 @@
       text-align:center;
     }
 
-    /* Separadores */
     .spacerWine{ height:22px; background:var(--wine); }
 
-    /* Pequeños */
     .smallCaps{
       font-size:12px;
       letter-spacing:.12em;
@@ -460,15 +361,11 @@
     <!-- PORTADA -->
     <section class="hero" id="inicio">
       <div class="heroArt">
-        <!-- Tu imagen -->
         <img src="portada.png" alt="Portada boda" onerror="this.style.display='none'">
       </div>
 
       <h1 class="script">nos casamos</h1>
-
-      <!-- Pulsa y gira -->
       <h2 class="names" id="names">Ainara y Ginés</h2>
-
       <div class="dateBadge" id="dateBadge">30 AGOSTO 2026</div>
 
       <p class="heroText">
@@ -483,7 +380,6 @@
 
       <div class="flipGrid">
 
-        <!-- Ceremonia -->
         <button class="flipCard" type="button" aria-label="Ceremonia (pulsa para girar)">
           <div class="flipInner">
             <div class="flipFace flipFront">
@@ -491,7 +387,6 @@
               <div class="subtitle" style="margin:6px 0 0;">Pulsa para ver el sitio</div>
             </div>
             <div class="flipFace flipBack">
-              <div class="label"></div>
               <p class="value">Iglesia San Nicolás</p>
               <div class="label">Fecha</div>
               <p class="value">30 Agosto, 2026</p>
@@ -506,7 +401,6 @@
           </div>
         </button>
 
-        <!-- Banquete -->
         <button class="flipCard" type="button" aria-label="Banquete (pulsa para girar)">
           <div class="flipInner">
             <div class="flipFace flipFront">
@@ -514,7 +408,6 @@
               <div class="subtitle" style="margin:6px 0 0;">Pulsa para ver el sitio</div>
             </div>
             <div class="flipFace flipBack">
-              <div class="label"></div>
               <p class="value">Hacienda La Fuente</p>
               <div class="label">Fecha</div>
               <p class="value">30 Agosto, 2026</p>
@@ -569,7 +462,6 @@
       </form>
 
       <div style="height:14px"></div>
-
       <h2 class="h2" style="margin-top:10px">Dresscode</h2>
     </section>
 
@@ -611,34 +503,34 @@
         <span style="color:var(--muted);font-weight:700;">🔎</span>
         <input id="songFilter" placeholder="Buscar canciones..." />
       </div>
-      
-<div id="playerBox" style="max-width:420px;margin:14px auto;display:none;">
-  <iframe
-    id="musicPlayer"
-    width="100%"
-    height="220"
-    frameborder="0"
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
 
-<div class="table" id="songTable">
-  <div class="row head">
-    <div>Canción</div><div>Artista</div><div>Escuchar</div>
-  </div>
+      <!-- Player SoundCloud (se muestra al primer toque) -->
+      <div id="playerBox" style="max-width:420px;margin:14px auto;display:none;">
+        <iframe
+          id="scPlayer"
+          width="100%"
+          height="166"
+          scrolling="no"
+          frameborder="no"
+          allow="autoplay">
+        </iframe>
+      </div>
 
-  <div class="row songRow" data-link="https://www.youtube.com/watch?v=CWsytZ_n2FQ">
-    <div>James</div><div><em>Ed Sheeran</em></div>
-    <button class="iconBtn playBtn" type="button">▶</button>
-  </div>
+      <div class="table" id="songTable">
+        <div class="row head">
+          <div>Canción</div><div>Artista</div><div>Escuchar</div>
+        </div>
 
-  <div class="row songRow" data-link="https://www.youtube.com/watch?v=aHxYwaZM-KA">
-    <div>The night we met</div><div><em>John Legend</em></div>
-    <button class="iconBtn playBtn" type="button">▶</button>
-  </div>
-</div>
-        
+        <div class="row songRow" data-link="https://www.youtube.com/watch?v=CWsytZ_n2FQ">
+          <div>James</div><div><em>Ed Sheeran</em></div>
+          <button class="iconBtn playBtn" type="button">▶</button>
+        </div>
+
+        <div class="row songRow" data-link="https://www.youtube.com/watch?v=aHxYwaZM-KA">
+          <div>The night we met</div><div><em>John Legend</em></div>
+          <button class="iconBtn playBtn" type="button">▶</button>
+        </div>
+      </div>
 
       <div class="addSong">
         <div class="inline">
@@ -676,7 +568,7 @@
       </div>
 
       <p class="status" style="max-width:420px;margin:10px auto 0;">
-        *Esto ahora mismo no guarda en servidor. Si quieres que se guarde de verdad (como la web de ejemplo), lo conectamos a Supabase.
+        *Esto ahora mismo no guarda en servidor. Si quieres que se guarde de verdad, lo conectamos a Supabase.
       </p>
     </section>
 
@@ -697,21 +589,33 @@
 
   </div>
 
-<script>
+  <!-- API SoundCloud (va fuera de la sección) -->
+  <script src="https://w.soundcloud.com/player/api.js"></script>
 
+  <script>
+    // 1) Girar nombres (tap)
+    const namesEl = document.getElementById("names");
+    if (namesEl) {
+      namesEl.addEventListener("click", () => namesEl.classList.toggle("flip"));
+    }
 
-    // 3) RSVP (ahora mismo solo muestra OK; para guardar de verdad: Supabase)
-    const rsvpForm = document.getElementById("rsvpForm");
-    const rsvpStatus = document.getElementById("rsvpStatus");
-    rsvpForm.addEventListener("submit",(e)=>{
-      e.preventDefault();
-      const data = new FormData(rsvpForm);
-      const name = (data.get("name")||"").toString().trim();
-      rsvpStatus.textContent = "✅ Recibido. (Si quieres que se guarde, lo conectamos a base de datos.)";
-      rsvpForm.reset();
+    // 2) Flip cards (Dónde será)
+    document.querySelectorAll(".flipCard").forEach(card=>{
+      card.addEventListener("click", ()=> card.classList.toggle("is-flipped"));
     });
 
-    // 4) Cuenta atrás (cambia la fecha)
+    // 3) RSVP
+    const rsvpForm = document.getElementById("rsvpForm");
+    const rsvpStatus = document.getElementById("rsvpStatus");
+    if (rsvpForm) {
+      rsvpForm.addEventListener("submit",(e)=>{
+        e.preventDefault();
+        rsvpStatus.textContent = "✅ Recibido. (Si quieres que se guarde, lo conectamos a base de datos.)";
+        rsvpForm.reset();
+      });
+    }
+
+    // 4) Cuenta atrás (AJUSTA la fecha si quieres)
     const target = new Date("2026-03-07T12:00:00");
     const cd = document.getElementById("countdown");
     function tick(){
@@ -725,32 +629,42 @@
       const m = Math.floor(diff / (1000*60));
       cd.textContent = `${d} d, ${h} h, ${m} m`;
     }
-    tick(); setInterval(tick, 1000);
+    if (cd) { tick(); setInterval(tick, 1000); }
 
+    // Utilidad
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, (c)=>({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+
+    // 5) Añadir canción (solo visual)
     const addBtn = document.getElementById("addSongBtn");
     const songStatus = document.getElementById("songStatus");
-    addBtn.addEventListener("click", ()=>{
-      const song = document.getElementById("newSong").value.trim();
-      const artist = document.getElementById("newArtist").value.trim();
-      if(!song){ songStatus.textContent = "Escribe una canción."; return; }
+    if (addBtn) {
+      addBtn.addEventListener("click", ()=>{
+        const song = document.getElementById("newSong").value.trim();
+        const artist = document.getElementById("newArtist").value.trim();
+        if(!song){ songStatus.textContent = "Escribe una canción."; return; }
 
-      const table = document.getElementById("songTable");
-      const row = document.createElement("div");
-      row.className = "row songRow";
-      row.dataset.song = song.toLowerCase();
-      row.dataset.artist = artist.toLowerCase();
-      row.dataset.video = "aHxYwaZM-KA"; 
-    row.innerHTML = `
-  <div>${escapeHtml(song)}</div>
-  <div><em>${escapeHtml(artist||"—")}</em></div>
-  <button class="iconBtn playBtn" type="button">▶</button>
-`;
-      table.appendChild(row);
+        const table = document.getElementById("songTable");
+        const row = document.createElement("div");
+        row.className = "row songRow";
+        row.dataset.song = song.toLowerCase();
+        row.dataset.artist = artist.toLowerCase();
 
-      document.getElementById("newSong").value = "";
-      document.getElementById("newArtist").value = "";
-      songStatus.textContent = "✅ Añadida (solo en tu navegador). Para que se guarde para todos, hay que conectar base de datos.";
-    });
+        row.innerHTML = `
+          <div>${escapeHtml(song)}</div>
+          <div><em>${escapeHtml(artist||"—")}</em></div>
+          <button class="iconBtn playBtn" type="button">▶</button>
+        `;
+        table.appendChild(row);
+
+        document.getElementById("newSong").value = "";
+        document.getElementById("newArtist").value = "";
+        songStatus.textContent = "✅ Añadida (solo en tu navegador).";
+      });
+    }
 
     // 6) Galería (preview local)
     const drop = document.getElementById("dropZone");
@@ -759,20 +673,25 @@
     const thumbs = document.getElementById("thumbs");
     const photoStatus = document.getElementById("photoStatus");
 
-    pick.addEventListener("click", ()=> input.click());
+    if (pick && input) pick.addEventListener("click", ()=> input.click());
 
-    drop.addEventListener("dragover", (e)=>{ e.preventDefault(); drop.style.opacity = "0.85"; });
-    drop.addEventListener("dragleave", ()=>{ drop.style.opacity = "1"; });
-    drop.addEventListener("drop", (e)=>{
-      e.preventDefault();
-      drop.style.opacity = "1";
-      const file = e.dataTransfer.files && e.dataTransfer.files[0];
-      if(file) preview(file);
-    });
-    input.addEventListener("change", ()=>{
-      const file = input.files && input.files[0];
-      if(file) preview(file);
-    });
+    if (drop) {
+      drop.addEventListener("dragover", (e)=>{ e.preventDefault(); drop.style.opacity = "0.85"; });
+      drop.addEventListener("dragleave", ()=>{ drop.style.opacity = "1"; });
+      drop.addEventListener("drop", (e)=>{
+        e.preventDefault();
+        drop.style.opacity = "1";
+        const file = e.dataTransfer.files && e.dataTransfer.files[0];
+        if(file) preview(file);
+      });
+    }
+
+    if (input) {
+      input.addEventListener("change", ()=>{
+        const file = input.files && input.files[0];
+        if(file) preview(file);
+      });
+    }
 
     function preview(file){
       if(!file.type.startsWith("image/")){ photoStatus.textContent = "Solo imágenes."; return; }
@@ -782,100 +701,60 @@
       img.src = url;
       img.alt = "Foto subida";
       thumbs.prepend(img);
-      photoStatus.textContent = "✅ Foto cargada (vista previa). Pulsa “SUBIR FOTO” si luego conectamos servidor.";
+      photoStatus.textContent = "✅ Foto cargada (vista previa).";
     }
 
-    document.getElementById("fakeUploadBtn").addEventListener("click", ()=>{
-      const n = document.getElementById("uploaderName").value.trim();
-      photoStatus.textContent = n ? `✅ Gracias, ${n}. (Falta conectar servidor para que se guarde.)`
-                                 : "✅ Gracias. (Falta conectar servidor para que se guarde.)";
+    const fakeUploadBtn = document.getElementById("fakeUploadBtn");
+    if (fakeUploadBtn) {
+      fakeUploadBtn.addEventListener("click", ()=>{
+        const n = document.getElementById("uploaderName").value.trim();
+        photoStatus.textContent = n ? `✅ Gracias, ${n}. (Falta conectar servidor para que se guarde.)`
+                                   : "✅ Gracias. (Falta conectar servidor para que se guarde.)";
+      });
+    }
+
+    // 7) SoundCloud: suena al primer toque
+    const playerBox = document.getElementById("playerBox");
+    const scFrame = document.getElementById("scPlayer");
+
+    let started = false;
+    let widget = null;
+
+    function makeSoundCloudEmbed(trackUrl){
+      return `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`;
+    }
+
+    function startMusic(){
+      if(started) return;
+      started = true;
+
+      const trackUrl = "https://soundcloud.com/robertmorr/robert-morr-x-aga-tenia-tanto-from-desire-2022-mashup-1";
+      scFrame.src = makeSoundCloudEmbed(trackUrl);
+      playerBox.style.display = "block";
+
+      widget = SC.Widget(scFrame);
+      widget.bind(SC.Widget.Events.READY, function(){
+        widget.play();
+      });
+
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
+
+    // 8) Botón ▶ de la lista: abre el link en nueva pestaña (no embebemos YouTube/Spotify aquí)
+    document.addEventListener("click", (e)=>{
+      const btn = e.target.closest(".playBtn");
+      if(!btn) return;
+
+      const row = btn.closest(".songRow");
+      const link = row?.dataset.link;
+      if(!link) return;
+
+      window.open(link, "_blank", "noopener,noreferrer");
     });
-
-    function escapeHtml(s){
-      return s.replace(/[&<>"']/g, (c)=>({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-      }[c]));
-    }
-
-
-const playerBox = document.getElementById("playerBox");
-const musicPlayer = document.getElementById("musicPlayer");
-
-function normalizeLink(raw){
-  if(!raw) return "";
-
-  // Si ya es embed de Spotify, ok
-  if(raw.includes("open.spotify.com/embed/")) return raw;
-
-  // Si es link normal de Spotify, lo convertimos a embed
-  // track
-  if(raw.includes("open.spotify.com/track/")){
-    const id = raw.split("/track/")[1].split("?")[0];
-    return `https://open.spotify.com/embed/track/${id}`;
-  }
-  // playlist
-  if(raw.includes("open.spotify.com/playlist/")){
-    const id = raw.split("/playlist/")[1].split("?")[0];
-    return `https://open.spotify.com/embed/playlist/${id}`;
-  }
-
-  // YouTube: si viene como watch?v=...
-  if(raw.includes("youtube.com/watch?v=")){
-    const id = raw.split("v=")[1].split("&")[0];
-    return `https://www.youtube.com/embed/${id}?autoplay=1`;
-  }
-  // YouTube: youtu.be/...
-  if(raw.includes("youtu.be/")){
-    const id = raw.split("youtu.be/")[1].split("?")[0];
-    return `https://www.youtube.com/embed/${id}?autoplay=1`;
-  }
-  // Si ya es embed de YouTube
-  if(raw.includes("youtube.com/embed/")) return raw + (raw.includes("?") ? "&autoplay=1" : "?autoplay=1");
-
-  return raw; // por si metes otra cosa
-}
-
-document.addEventListener("click", (e)=>{
-
-  const btn = e.target.closest(".playBtn");
-  if(!btn) return;
-
-  e.stopPropagation();
-
-  const row = btn.closest(".songRow");
-  const raw = row?.dataset.link;   // 👈 AQUÍ sacamos el link
-
-  if(!raw) return;
-
-  const src = normalizeLink(raw);
-  if(!src) return;
-
-  musicPlayer.src = src;
-  playerBox.style.display = "block";
-  playerBox.scrollIntoView({ behavior:"smooth", block:"center" });
-
-});
-
-let started = false;
-
-function startMusic(){
-  if(started) return;
-  started = true;
-
-  const spotifyLink =
-    "https://open.spotify.com/embed/track/5yJaXWIErrrsjQ3J0eR5aK";
-
-  musicPlayer.src = spotifyLink;
-
-  playerBox.style.display = "block";
-
-  document.removeEventListener("click", startMusic);
-  document.removeEventListener("touchstart", startMusic);
-}
-
-document.addEventListener("click", startMusic);
-document.addEventListener("touchstart", startMusic);
-    
   </script>
 </body>
 </html>
