@@ -232,19 +232,22 @@ body{
 
     /* Flip cards (pulsas y gira) */
     .flipGrid{ display:grid; gap:14px; }
-    .flipCard{
-      border:0;
-      padding:0;
-      background:transparent;
-      perspective:1100px;
-      cursor:pointer;
-    }
-    .flipInner{
-      position:relative;
-      min-height:210px;
-      transform-style:preserve-3d;
-      transition:transform .65s;
-    }
+.flipCard{
+  border:0;
+  padding:0;
+  background:transparent;
+  perspective:1100px;
+  cursor:pointer;
+  overflow:hidden;
+  border-radius:var(--radius);
+}
+.flipInner{
+  position:relative;
+  min-height:210px;
+  transform-style:preserve-3d;
+  transition:transform .65s;
+  overflow:hidden;
+}
     .flipCard.is-flipped .flipInner{ transform: rotateY(180deg); }
     .flipFace{
       position:absolute; inset:0;
