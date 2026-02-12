@@ -611,43 +611,34 @@
         <span style="color:var(--muted);font-weight:700;">🔎</span>
         <input id="songFilter" placeholder="Buscar canciones..." />
       </div>
-
-      <div class="table" id="songTable">
-        <div id="ytPlayerBox" style="max-width:420px;margin:14px auto;display:none;">
+      
+<div id="playerBox" style="max-width:420px;margin:14px auto;display:none;">
   <iframe
-    id="ytPlayer"
+    id="musicPlayer"
     width="100%"
     height="220"
     frameborder="0"
-    allow="autoplay; encrypted-media"
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     allowfullscreen>
   </iframe>
-        </div>
-        <div class="row head">
-          <div>Canción</div><div>Artista</div><div>Escuchar</div>
-        </div>
-
-       <!-- Ejemplos -->
-<div class="row songRow" data-video="CWsytZ_n2FQ">
-  <div>James</div><div><em>Ed Sheeran</em></div>
-  <button class="iconBtn playBtn" type="button">▶</button>
 </div>
 
-<div class="row songRow" data-video="aHxYwaZM-KA">
-  <div>The night we met</div><div><em>John Legend</em></div>
-  <button class="iconBtn playBtn" type="button">▶</button>
+<div class="table" id="songTable">
+  <div class="row head">
+    <div>Canción</div><div>Artista</div><div>Escuchar</div>
+  </div>
+
+  <div class="row songRow" data-link="https://www.youtube.com/watch?v=CWsytZ_n2FQ">
+    <div>James</div><div><em>Ed Sheeran</em></div>
+    <button class="iconBtn playBtn" type="button">▶</button>
+  </div>
+
+  <div class="row songRow" data-link="https://www.youtube.com/watch?v=aHxYwaZM-KA">
+    <div>The night we met</div><div><em>John Legend</em></div>
+    <button class="iconBtn playBtn" type="button">▶</button>
+  </div>
 </div>
         
-        <div id="ytPlayerBox" style="max-width:420px;margin:14px auto;display:none;">
-  <iframe
-    id="ytPlayer"
-    width="100%"
-    height="220"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
-</div>
 
       <div class="addSong">
         <div class="inline">
@@ -814,19 +805,57 @@
     }
 
 
-const ytBox = document.getElementById("ytPlayerBox");
-const ytFrame = document.getElementById("ytPlayer");
+const playerBox = document.getElementById("playerBox");
+const div class="table"  = document.getElementById("div class="table" ");
+
+function normalizeLink(raw){
+  if(!raw) return "";
+
+  // Si ya es embed de Spotify, ok
+  if(raw.includes("open.spotify.com/embed/")) return raw;
+
+  // Si es link normal de Spotify, lo convertimos a embed
+  // track
+  if(raw.includes("open.spotify.com/track/")){
+    const id = raw.split("/track/")[1].split("?")[0];
+    return `https://open.spotify.com/embed/track/${id}`;
+  }
+  // playlist
+  if(raw.includes("open.spotify.com/playlist/")){
+    const id = raw.split("/playlist/")[1].split("?")[0];
+    return `https://open.spotify.com/embed/playlist/${id}`;
+  }
+
+  // YouTube: si viene como watch?v=...
+  if(raw.includes("youtube.com/watch?v=")){
+    const id = raw.split("v=")[1].split("&")[0];
+    return `https://www.youtube.com/embed/${id}?autoplay=1`;
+  }
+  // YouTube: youtu.be/...
+  if(raw.includes("youtu.be/")){
+    const id = raw.split("youtu.be/")[1].split("?")[0];
+    return `https://www.youtube.com/embed/${id}?autoplay=1`;
+  }
+  // Si ya es embed de YouTube
+  if(raw.includes("youtube.com/embed/")) return raw + (raw.includes("?") ? "&autoplay=1" : "?autoplay=1");
+
+  return raw; // por si metes otra cosa
+}
 
 document.addEventListener("click", (e)=>{
-  if(!e.target.classList.contains("playBtn")) return;
+  const btn = e.target.closest(".playBtn");
+  if(!btn) return;
 
-  const row = e.target.closest(".songRow");
-  const videoId = row?.dataset.video;
-  if(!videoId) return;
+  e.stopPropagation();
+  const row = btn.closest(".songRow");
+  const raw = row?.dataset.link;
+  const src = normalizeLink(raw);
 
-  ytFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-  ytBox.style.display = "block";
-  ytBox.scrollIntoView({ behavior:"smooth", block:"center" });
+  if(!src) return;
+
+  div class="table" .src = src;
+  playerBox.style.display = "block";
+  playerBox.scrollIntoView({ behavior:"smooth", block:"center" });
 });
     
   </script>
