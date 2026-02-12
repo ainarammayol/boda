@@ -622,7 +622,7 @@
     allow="autoplay; encrypted-media"
     allowfullscreen>
   </iframe>
-</div
+        </div>
         <div class="row head">
           <div>Canción</div><div>Artista</div><div>Escuchar</div>
         </div>
@@ -755,6 +755,7 @@
       row.className = "row songRow";
       row.dataset.song = song.toLowerCase();
       row.dataset.artist = artist.toLowerCase();
+      row.dataset.video = "aHxYwaZM-KA"; 
     row.innerHTML = `
   <div>${escapeHtml(song)}</div>
   <div><em>${escapeHtml(artist||"—")}</em></div>
@@ -812,21 +813,6 @@
       }[c]));
     }
 
-    const ytBox = document.getElementById("ytPlayerBox");
-const ytFrame = document.getElementById("ytPlayer");
-
-document.querySelectorAll(".playBtn").forEach(btn=>{
-  btn.addEventListener("click", (e)=>{
-    e.stopPropagation();
-    const row = btn.closest(".songRow");
-    const videoId = row?.dataset.video;
-    if(!videoId) return;
-
-    ytFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    ytBox.style.display = "block";
-    ytBox.scrollIntoView({ behavior:"smooth", block:"center" });
-  });
-});
 
 const ytBox = document.getElementById("ytPlayerBox");
 const ytFrame = document.getElementById("ytPlayer");
