@@ -843,19 +843,24 @@ function normalizeLink(raw){
 }
 
 document.addEventListener("click", (e)=>{
+
   const btn = e.target.closest(".playBtn");
   if(!btn) return;
 
   e.stopPropagation();
-  const row = btn.closest(".songRow");
-  const raw = row?.dataset.link;
-  const src = normalizeLink(raw);
 
+  const row = btn.closest(".songRow");
+  const raw = row?.dataset.link;   // 👈 AQUÍ sacamos el link
+
+  if(!raw) return;
+
+  const src = normalizeLink(raw);
   if(!src) return;
 
-  div class="table" .src = src;
+  musicPlayer.src = src;
   playerBox.style.display = "block";
   playerBox.scrollIntoView({ behavior:"smooth", block:"center" });
+
 });
     
   </script>
