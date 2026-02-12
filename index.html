@@ -604,16 +604,7 @@
       card.addEventListener("click", ()=> card.classList.toggle("is-flipped"));
     });
 
-    // 3) RSVP
-    const rsvpForm = document.getElementById("rsvpForm");
-    const rsvpStatus = document.getElementById("rsvpStatus");
-    if (rsvpForm) {
-      rsvpForm.addEventListener("submit",(e)=>{
-        e.preventDefault();
-        rsvpStatus.textContent = "✅ Recibido. (Si quieres que se guarde, lo conectamos a base de datos.)";
-        rsvpForm.reset();
-      });
-    }
+    
 
     // 4) Cuenta atrás (AJUSTA la fecha si quieres)
     const target = new Date("2026-03-07T12:00:00");
@@ -755,14 +746,11 @@
 
       window.open(link, "_blank", "noopener,noreferrer");
     });
-  </script>
-  <script>
-// ===== RSVP -> Google Sheets =====
-
+<script>
 const rsvpForm = document.getElementById("rsvpForm");
 const rsvpStatus = document.getElementById("rsvpStatus");
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbwbidnrdsVNPHTS3WFXnSlOW3lOrbHHlHy4DDlXHcfZJXZCU67TW0N1QWo7nNcD-L9V/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzldlIxcoOeS5S6Qpn3CMyw7IwvdxpuHda34JUSKZC99bKTIzsRJBPowcJyWvR8tB7U/exec";
 
 rsvpForm.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -778,19 +766,16 @@ rsvpForm.addEventListener("submit", async (e) => {
   rsvpStatus.textContent = "Enviando...";
 
   try {
-    const res = await fetch(SHEET_URL, {
+    // no-cors = aunque el navegador bloquee la respuesta, el envío llega a Sheets
+    await fetch(SHEET_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     });
 
-    if (!res.ok) throw new Error("Error " + res.status);
-
     rsvpStatus.textContent = "✅ Confirmado. ¡Gracias!";
     rsvpForm.reset();
-
   } catch (err) {
     console.error(err);
     rsvpStatus.textContent = "❌ Error al enviar. Inténtalo otra vez.";
