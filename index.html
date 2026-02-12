@@ -686,12 +686,15 @@ body{
 
   <script>
 function updateCountdown() {
-  const weddingDate = new Date("2026-03-07T00:00:00").getTime();
-  const now = new Date().getTime();
-  const diff = weddingDate - now;
+  const target = new Date("2026-03-07T00:00:00").getTime(); // 7 marzo 2026
+  const now = Date.now();
+  const diff = target - now;
+
+  const el = document.getElementById("countdown");
+  if (!el) return;
 
   if (diff <= 0) {
-    document.getElementById("countdown").innerHTML = "¡Hoy es el gran día!";
+    el.textContent = "¡Hoy es el gran día!";
     return;
   }
 
@@ -699,8 +702,7 @@ function updateCountdown() {
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
-  document.getElementById("countdown").innerHTML =
-    days + " d, " + hours + " h, " + minutes + " m";
+  el.textContent = `${days} d, ${hours} h, ${minutes} m`;
 }
 
 updateCountdown();
