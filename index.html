@@ -21,15 +21,19 @@
       --line:rgba(107,36,52,.35);
       --radius:22px;
       --max:480px;
-    }
+  *{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:var(--cream);
-      color:var(--ink);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-    }
+body{
+  width:100%;
+  overflow-x:hidden;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
 
     /* Contenedor móvil */
     .wrap{
@@ -605,10 +609,7 @@
         ¿Qué es una boda sin la mejor música? ¡Añade las canciones que no pueden faltar este día!
       </p>
 
-      <div class="searchBox">
-        <span style="color:var(--muted);font-weight:700;">🔎</span>
-        <input id="songFilter" placeholder="Buscar canciones..." />
-      </div>
+   
 
       <div class="table" id="songTable">
         <div class="row head">
@@ -684,6 +685,29 @@
   </div>
 
   <script>
+function updateCountdown() {
+  const weddingDate = new Date("2026-03-07T00:00:00").getTime();
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("countdown").innerHTML = "¡Hoy es el gran día!";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  document.getElementById("countdown").innerHTML =
+    days + " d, " + hours + " h, " + minutes + " m";
+}
+
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+    </script>
+  
     // 1) Girar nombres (tap)
     const namesEl = document.getElementById("names");
     namesEl.addEventListener("click", () => namesEl.classList.toggle("flip"));
