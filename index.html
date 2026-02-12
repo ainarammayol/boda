@@ -25,11 +25,15 @@
 
     *{box-sizing:border-box}
     body{
-      margin:0;
-      background:var(--cream);
-      color:var(--ink);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-    }
+  margin:0;
+  padding:0;
+  width:100%;
+  overflow-x:hidden;
+  font-family: Arial, sans-serif;
+  background:#6b2434;
+  color:white;
+  text-align:center;
+}
 
     /* Contenedor móvil */
     .wrap{
@@ -452,11 +456,6 @@
 
 <body>
   <div class="wrap">
-
-    <div class="topbar">
-      <div class="domain">www.tuweb.com</div>
-      <button class="close" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">×</button>
-    </div>
 
     <!-- PORTADA -->
     <section class="hero" id="inicio">
