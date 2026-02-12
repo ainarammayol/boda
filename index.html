@@ -1,95 +1,806 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestra Boda</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Nuestra boda</title>
 
-<style>
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#6b2434;
-  color:white;
-  text-align:center;
-}
+  <!-- Fuentes parecidas al estilo de la captura -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-.hero{
-    min-height:100vh;
-    padding:60px 20px;
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    text-shadow: 0 2px 6px rgba(0,0,0,.6);
+  <style>
+    :root{
+      --wine:#6b2434;
+      --wine2:#7a2a3b;
+      --cream:#f6f1ea;
+      --paper:#fff;
+      --ink:#2a1a1f;
+      --muted:#7b6b6f;
+      --line:rgba(107,36,52,.35);
+      --radius:22px;
+      --max:480px;
+    }
 
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--cream);
+      color:var(--ink);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
 
-.names{
-  font-size:40px;
-  cursor:pointer;
-  transition: transform 0.6s;
-}
+    /* Contenedor móvil */
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      background:var(--paper);
+      min-height:100vh;
+    }
 
-.flip{
-  transform: rotateY(180deg);
-}
+    /* Header tipo “modal” con X */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:10;
+      height:54px;
+      background:rgba(246,241,234,.85);
+      backdrop-filter: blur(8px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-bottom:1px solid rgba(0,0,0,.04);
+    }
+    .topbar .domain{
+      font-size:14px;
+      color:#555;
+      letter-spacing:.02em;
+    }
+    .close{
+      position:absolute;
+      right:14px;
+      width:44px;
+      height:44px;
+      border-radius:999px;
+      border:0;
+      background:rgba(0,0,0,.65);
+      color:#fff;
+      font-size:22px;
+      line-height:1;
+      cursor:pointer;
+    }
 
-.section{
-  background:white;
-  color:#6b2434;
-  padding:40px 20px;
-}
+    /* Secciones */
+    .section{
+      padding:26px 18px;
+      text-align:center;
+    }
+    .section.white{
+      background:var(--paper);
+    }
+    .section.wine{
+      background:var(--wine);
+      color:#fff;
+    }
 
-.card{
-  border:2px solid #6b2434;
-  border-radius:20px;
-  padding:20px;
-  margin:20px auto;
-  max-width:300px;
-  cursor:pointer;
-  transition: transform 0.6s;
-}
+    /* Portada */
+    .hero{
+      min-height: calc(100vh - 54px);
+      background:var(--wine);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:26px 18px 30px;
+      gap:16px;
+    }
+    .heroArt{
+      width:100%;
+      max-width:420px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.12);
+    }
+    .heroArt img{width:100%; height:auto; display:block}
+    .script{
+      font-family:"Great Vibes", cursive;
+      font-size:52px;
+      margin:0;
+      line-height:1;
+      opacity:.95;
+    }
+    .names{
+      font-family:"Great Vibes", cursive;
+      font-size:50px;
+      margin:0;
+      line-height:1.05;
+      cursor:pointer;
+      display:inline-block;
+      transform-origin:center;
+      transition: transform .6s;
+    }
+    .names.flip{ transform: rotateY(180deg); }
 
-.card.flip{
-  transform: rotateY(180deg);
-}
-</style>
+    .dateBadge{
+      width:100%;
+      max-width:360px;
+      margin-top:6px;
+      padding:16px 16px;
+      border:2px solid rgba(255,255,255,.75);
+      border-radius:20px;
+      font-family:"Cormorant Garamond", serif;
+      letter-spacing:.09em;
+      font-size:24px;
+      text-transform:uppercase;
+    }
+    .heroText{
+      max-width:40ch;
+      margin:8px 0 0;
+      font-weight:600;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      line-height:1.35;
+      opacity:.92;
+      font-size:13px;
+    }
+
+    /* Títulos estilo captura */
+    .h2{
+      font-family:"Great Vibes", cursive;
+      font-size:52px;
+      margin:0 0 8px;
+      color:var(--wine2);
+    }
+    .h2.white{ color:#fff; }
+    .subtitle{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-weight:600;
+    }
+    .subtitle.white{ color:rgba(255,255,255,.85); }
+
+    /* Decoración tipo “lazo” */
+    .doodleRow{
+      display:flex;
+      justify-content:center;
+      margin:10px 0 12px;
+    }
+    .doodle{
+      width:180px;
+      height:28px;
+      opacity:.9;
+    }
+    .doodle path{
+      stroke: currentColor;
+      stroke-width:3;
+      fill:none;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    /* Tarjetas “marco ondulado” */
+    .card{
+      position:relative;
+      border:2px solid var(--wine2);
+      border-radius:var(--radius);
+      padding:22px 18px;
+      background:#fff;
+      margin:14px auto;
+      max-width:420px;
+    }
+    .card.soft{
+      background: #fbf7f2;
+    }
+    .label{
+      margin:8px 0 4px;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-weight:700;
+    }
+    .value{
+      margin:0;
+      font-family:"Cormorant Garamond", serif;
+      font-size:18px;
+      color:#5f1f2e;
+      font-weight:600;
+    }
+    .btn{
+      display:inline-block;
+      margin-top:14px;
+      background:var(--wine2);
+      color:#fff;
+      padding:12px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:700;
+      border:0;
+      cursor:pointer;
+    }
+    .btnWide{
+      width:100%;
+      display:block;
+    }
+
+    /* Flip cards (pulsas y gira) */
+    .flipGrid{ display:grid; gap:14px; }
+    .flipCard{
+      border:0;
+      padding:0;
+      background:transparent;
+      perspective:1100px;
+      cursor:pointer;
+    }
+    .flipInner{
+      position:relative;
+      min-height:210px;
+      transform-style:preserve-3d;
+      transition:transform .65s;
+    }
+    .flipCard.is-flipped .flipInner{ transform: rotateY(180deg); }
+    .flipFace{
+      position:absolute; inset:0;
+      backface-visibility:hidden;
+      border:2px solid var(--wine2);
+      border-radius:var(--radius);
+      background:#fff;
+      padding:22px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:8px;
+    }
+    .flipBack{ transform: rotateY(180deg); }
+
+    /* RSVP */
+    .form{
+      max-width:420px;
+      margin:0 auto;
+      text-align:left;
+    }
+    .fieldLabel{
+      font-family:"Cormorant Garamond", serif;
+      color:var(--wine2);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin:14px 0 8px;
+      font-weight:700;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:999px;
+      border:2px solid var(--wine2);
+      background:#fff;
+      font-size:14px;
+      outline:none;
+    }
+    textarea{ border-radius:18px; }
+    .status{ margin-top:10px; color:var(--muted); font-size:12px; }
+
+    /* Preguntas */
+    .qa{
+      max-width:420px;
+      margin:0 auto;
+      text-align:left;
+    }
+    details{
+      border-top:2px solid rgba(255,255,255,.55);
+      padding:14px 0;
+    }
+    details:last-child{ border-bottom:2px solid rgba(255,255,255,.55); }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      font-family:"Cormorant Garamond", serif;
+      letter-spacing:.06em;
+      font-weight:600;
+      position:relative;
+      padding-right:28px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    summary::after{
+      content:"+";
+      position:absolute;
+      right:0;
+      top:0;
+      font-weight:800;
+    }
+    details[open] summary::after{ content:"–"; }
+    .answer{
+      margin-top:10px;
+      color:rgba(255,255,255,.9);
+      line-height:1.45;
+      font-size:14px;
+    }
+
+    /* Lista de canciones */
+    .searchBox{
+      max-width:420px;
+      margin:0 auto 14px;
+      border:2px solid var(--wine2);
+      border-radius:999px;
+      padding:12px 14px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .searchBox input{
+      border:0;
+      padding:0;
+      border-radius:0;
+      background:transparent;
+      outline:none;
+      flex:1;
+      font-size:14px;
+    }
+    .table{
+      max-width:420px;
+      margin:0 auto;
+      border:2px solid var(--wine2);
+      border-radius:22px;
+      overflow:hidden;
+      background:#fbf7f2;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr 70px;
+      gap:10px;
+      padding:12px 14px;
+      align-items:center;
+      border-top:1px solid rgba(107,36,52,.18);
+      font-family:"Cormorant Garamond", serif;
+      color:#5f1f2e;
+    }
+    .row.head{
+      background:#fff;
+      border-top:0;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-family:Inter, system-ui;
+      font-size:12px;
+      color:var(--wine2);
+    }
+    .iconBtn{
+      width:40px;height:40px;
+      border-radius:12px;
+      border:1px solid rgba(107,36,52,.25);
+      background:#fff;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+    }
+    .addSong{
+      max-width:420px;
+      margin:12px auto 0;
+      display:grid;
+      gap:10px;
+    }
+    .addSong .inline{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+
+    /* Galería */
+    .drop{
+      max-width:420px;
+      margin:0 auto;
+      border:3px dashed rgba(107,36,52,.35);
+      border-radius:24px;
+      background:#fbf7f2;
+      padding:22px 16px;
+      text-align:center;
+    }
+    .drop strong{ color:var(--wine2); }
+    .thumbs{
+      max-width:420px;
+      margin:14px auto 0;
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+    }
+    .thumbs img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:18px;
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    /* Cuenta atrás */
+    .countWrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+    .countBadge{
+      background:var(--wine);
+      color:#fff;
+      border-radius:18px;
+      padding:14px 16px;
+      border:2px solid rgba(255,255,255,.75);
+      font-family:"Cormorant Garamond", serif;
+      letter-spacing:.04em;
+      font-size:22px;
+      min-width:220px;
+      text-align:center;
+    }
+
+    /* Separadores */
+    .spacerWine{ height:22px; background:var(--wine); }
+
+    /* Pequeños */
+    .smallCaps{
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<div class="hero" style="background-image:url('portada.png');">
-  <h1 class="names" onclick="flipName()">Emilio & Estrella</h1>
-  <p>30 Agosto 2026</p>
-</div>
+    <div class="topbar">
+      <div class="domain">www.tuweb.com</div>
+      <button class="close" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">×</button>
+    </div>
 
-<div class="section">
-  <h2>¿Dónde será?</h2>
+    <!-- PORTADA -->
+    <section class="hero" id="inicio">
+      <div class="heroArt">
+        <!-- Tu imagen -->
+        <img src="portada.png" alt="Portada boda" onerror="this.style.display='none'">
+      </div>
 
-  <div class="card" onclick="flipCard(this)">
-    Iglesia San Nicolás<br>
-    12:00h
+      <h1 class="script">nos casamos</h1>
+
+      <!-- Pulsa y gira -->
+      <h2 class="names" id="names">Estrella y Emilio</h2>
+
+      <div class="dateBadge" id="dateBadge">30 AGOSTO 2026</div>
+
+      <p class="heroText">
+        ¡Estamos muy felices de anunciaros que nos casamos y que nos encantaría que formarais parte de este gran día!
+      </p>
+    </section>
+
+    <!-- DÓNDE SERÁ -->
+    <section class="section white" id="donde">
+      <h2 class="h2">¿Dónde será?</h2>
+      <p class="subtitle">¡Pulsa para saber cómo llegar!</p>
+
+      <div class="flipGrid">
+
+        <!-- Ceremonia -->
+        <button class="flipCard" type="button" aria-label="Ceremonia (pulsa para girar)">
+          <div class="flipInner">
+            <div class="flipFace flipFront">
+              <div class="smallCaps" style="color:var(--wine2)">Ceremonia</div>
+              <div class="subtitle" style="margin:6px 0 0;">Pulsa para ver el sitio</div>
+            </div>
+            <div class="flipFace flipBack">
+              <div class="label">Lugar</div>
+              <p class="value">Iglesia San Nicolás</p>
+              <div class="label">Fecha</div>
+              <p class="value">30 Agosto, 2026</p>
+              <div class="label">Hora</div>
+              <p class="value">12:00 hrs</p>
+
+              <a class="btn" target="_blank" rel="noreferrer"
+                 href="https://www.google.com/maps?q=Iglesia%20San%20Nicol%C3%A1s">
+                Ver en Google Maps
+              </a>
+            </div>
+          </div>
+        </button>
+
+        <!-- Banquete -->
+        <button class="flipCard" type="button" aria-label="Banquete (pulsa para girar)">
+          <div class="flipInner">
+            <div class="flipFace flipFront">
+              <div class="smallCaps" style="color:var(--wine2)">Banquete</div>
+              <div class="subtitle" style="margin:6px 0 0;">Pulsa para ver el sitio</div>
+            </div>
+            <div class="flipFace flipBack">
+              <div class="label">Lugar</div>
+              <p class="value">Hacienda La Fuente</p>
+              <div class="label">Fecha</div>
+              <p class="value">30 Agosto, 2026</p>
+              <div class="label">Hora</div>
+              <p class="value">13:30 hrs</p>
+
+              <a class="btn" target="_blank" rel="noreferrer"
+                 href="https://www.google.com/maps?q=Hacienda%20La%20Fuente">
+                Ver en Google Maps
+              </a>
+            </div>
+          </div>
+        </button>
+
+      </div>
+    </section>
+
+    <div class="spacerWine"></div>
+
+    <!-- RSVP -->
+    <section class="section white" id="rsvp">
+      <h2 class="h2" style="font-family:'Cormorant Garamond',serif; font-size:44px; color:var(--wine2); margin-bottom:0;">RSVP</h2>
+
+      <div class="doodleRow" style="color:var(--wine2)">
+        <svg class="doodle" viewBox="0 0 200 40" aria-hidden="true">
+          <path d="M10 25 C25 5, 45 45, 60 25 S95 5, 110 25 S145 45, 160 25 S185 5, 190 25" />
+        </svg>
+      </div>
+
+      <form class="form" id="rsvpForm">
+        <div class="fieldLabel">Nombre y apellidos</div>
+        <input name="name" required placeholder="Nombre y Apellidos"/>
+
+        <div class="fieldLabel">Nombre y apellidos pareja</div>
+        <input name="partner" placeholder="Nombre y Apellidos"/>
+
+        <div class="fieldLabel">¿Alguna alergia o intolerancia?</div>
+        <input name="allergies" placeholder="Todo estará riquísimo!"/>
+
+        <div class="fieldLabel">¿Necesitas transporte?</div>
+        <select name="transport">
+          <option value="">Selecciona una opción</option>
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+
+        <div class="fieldLabel">¿Tenéis alguna sugerencia?</div>
+        <textarea name="notes" rows="4" placeholder="Sabemos que sois muuuy creativos!"></textarea>
+
+        <button class="btn btnWide" type="submit">CONFIRMAR MI ASISTENCIA</button>
+        <div class="status" id="rsvpStatus"></div>
+      </form>
+
+      <div style="height:14px"></div>
+
+      <h2 class="h2" style="margin-top:10px">Dresscode</h2>
+    </section>
+
+    <!-- PREGUNTAS -->
+    <section class="section wine" id="preguntas">
+      <h2 class="h2 white">Preguntas</h2>
+
+      <div class="qa">
+        <details>
+          <summary>¿HORARIOS DEL TRANSPORTE?</summary>
+          <div class="answer">Pon aquí los horarios y punto de recogida.</div>
+        </details>
+        <details>
+          <summary>¿DÓNDE NOS ALOJAMOS?</summary>
+          <div class="answer">Pon aquí 2–3 hoteles recomendados y cómo reservar.</div>
+        </details>
+        <details>
+          <summary>¿MAQUILLAJE Y PELUQUERÍA?</summary>
+          <div class="answer">Recomendamos los servicios de… (teléfono/Instagram).</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- LISTA DE CANCIONES -->
+    <section class="section white" id="canciones">
+      <h2 class="h2" style="font-family:'Cormorant Garamond',serif; font-size:44px; margin-bottom:0;">Nuestra Lista de Canciones</h2>
+
+      <div class="doodleRow" style="color:var(--wine2)">
+        <svg class="doodle" viewBox="0 0 200 40" aria-hidden="true">
+          <path d="M10 25 C25 5, 45 45, 60 25 S95 5, 110 25 S145 45, 160 25 S185 5, 190 25" />
+        </svg>
+      </div>
+
+      <p class="subtitle" style="max-width:44ch;margin:0 auto 14px;">
+        ¿Qué es una boda sin la mejor música? ¡Añade las canciones que no pueden faltar este día!
+      </p>
+
+      <div class="searchBox">
+        <span style="color:var(--muted);font-weight:700;">🔎</span>
+        <input id="songFilter" placeholder="Buscar canciones..." />
+      </div>
+
+      <div class="table" id="songTable">
+        <div class="row head">
+          <div>Canción</div><div>Artista</div><div>Escuchar</div>
+        </div>
+
+        <!-- Ejemplos -->
+        <div class="row songRow" data-song="perfect" data-artist="ed sheeran">
+          <div>Perfect</div><div><em>Ed Sheeran</em></div>
+          <button class="iconBtn" title="No hay Spotify conectado">♪</button>
+        </div>
+        <div class="row songRow" data-song="all of me" data-artist="john legend">
+          <div>All of Me</div><div><em>John Legend</em></div>
+          <button class="iconBtn" title="No hay Spotify conectado">♪</button>
+        </div>
+      </div>
+
+      <div class="addSong">
+        <div class="inline">
+          <input id="newSong" placeholder="Canción" />
+          <input id="newArtist" placeholder="Artista" />
+        </div>
+        <button class="btn btnWide" type="button" id="addSongBtn">AÑADIR CANCIÓN</button>
+        <div class="status" id="songStatus"></div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section class="section white" id="galeria">
+      <h2 class="h2">Galería</h2>
+      <p class="subtitle" style="max-width:44ch;margin:0 auto 16px;">
+        ¿Tienes fotos especiales con nosotros? ¡Comparte tus momentos!
+      </p>
+
+      <div class="drop" id="dropZone">
+        <div style="font-size:40px;margin-bottom:8px;">📷</div>
+        <div><strong>Arrastra una foto aquí</strong> o <span style="text-decoration:underline;cursor:pointer" id="pickFile">haz clic para seleccionar</span></div>
+        <div class="subtitle" style="margin:10px 0 0;">JPG, PNG o WebP (máx. 10MB)</div>
+        <input type="file" id="fileInput" accept="image/*" hidden />
+      </div>
+
+      <div class="thumbs" id="thumbs"></div>
+
+      <div style="height:10px"></div>
+
+      <div class="form">
+        <div class="fieldLabel">Tu nombre</div>
+        <input id="uploaderName" placeholder="¿Cuál es tu nombre?" />
+        <button class="btn btnWide" type="button" id="fakeUploadBtn">SUBIR FOTO</button>
+        <div class="status" id="photoStatus"></div>
+      </div>
+
+      <p class="status" style="max-width:420px;margin:10px auto 0;">
+        *Esto ahora mismo no guarda en servidor. Si quieres que se guarde de verdad (como la web de ejemplo), lo conectamos a Supabase.
+      </p>
+    </section>
+
+    <!-- CUENTA ATRÁS -->
+    <section class="section wine" id="final">
+      <p class="subtitle white" style="font-family:'Cormorant Garamond',serif; font-size:26px; margin-bottom:14px;">
+        Que el amor sea siempre nuestro lugar seguro
+      </p>
+
+      <div class="countWrap">
+        <div class="countBadge" id="countdown">—</div>
+        <div class="names" style="cursor:default; font-size:46px;">Emilio & Estrella</div>
+      </div>
+
+      <div style="height:18px"></div>
+      <div style="opacity:.9;font-family:'Cormorant Garamond',serif;">No puedes faltar 🤍</div>
+    </section>
+
   </div>
 
-  <div class="card" onclick="flipCard(this)">
-    Hacienda La Fuente<br>
-    13:30h
-  </div>
-</div>
+  <script>
+    // 1) Girar nombres (tap)
+    const namesEl = document.getElementById("names");
+    namesEl.addEventListener("click", () => namesEl.classList.toggle("flip"));
 
-<script>
-function flipName(){
-  document.querySelector(".names").classList.toggle("flip");
-}
+    // 2) Flip cards (Dónde será)
+    document.querySelectorAll(".flipCard").forEach(card=>{
+      card.addEventListener("click", ()=> card.classList.toggle("is-flipped"));
+    });
 
-function flipCard(card){
-  card.classList.toggle("flip");
-}
-</script>
+    // 3) RSVP (ahora mismo solo muestra OK; para guardar de verdad: Supabase)
+    const rsvpForm = document.getElementById("rsvpForm");
+    const rsvpStatus = document.getElementById("rsvpStatus");
+    rsvpForm.addEventListener("submit",(e)=>{
+      e.preventDefault();
+      const data = new FormData(rsvpForm);
+      const name = (data.get("name")||"").toString().trim();
+      rsvpStatus.textContent = "✅ Recibido. (Si quieres que se guarde, lo conectamos a base de datos.)";
+      rsvpForm.reset();
+    });
 
+    // 4) Cuenta atrás (cambia la fecha)
+    const target = new Date("2026-08-30T12:00:00");
+    const cd = document.getElementById("countdown");
+    function tick(){
+      const now = new Date();
+      let diff = target - now;
+      if(diff <= 0){ cd.textContent = "¡Hoy es el día!"; return; }
+      const d = Math.floor(diff / (1000*60*60*24));
+      diff -= d*(1000*60*60*24);
+      const h = Math.floor(diff / (1000*60*60));
+      diff -= h*(1000*60*60);
+      const m = Math.floor(diff / (1000*60));
+      cd.textContent = `${d} d, ${h} h, ${m} m`;
+    }
+    tick(); setInterval(tick, 1000);
+
+    // 5) Lista de canciones (simple, local)
+    const filter = document.getElementById("songFilter");
+    filter.addEventListener("input", ()=>{
+      const q = filter.value.toLowerCase().trim();
+      document.querySelectorAll(".songRow").forEach(r=>{
+        const s = (r.dataset.song||"") + " " + (r.dataset.artist||"");
+        r.style.display = s.includes(q) ? "" : "none";
+      });
+    });
+
+    const addBtn = document.getElementById("addSongBtn");
+    const songStatus = document.getElementById("songStatus");
+    addBtn.addEventListener("click", ()=>{
+      const song = document.getElementById("newSong").value.trim();
+      const artist = document.getElementById("newArtist").value.trim();
+      if(!song){ songStatus.textContent = "Escribe una canción."; return; }
+
+      const table = document.getElementById("songTable");
+      const row = document.createElement("div");
+      row.className = "row songRow";
+      row.dataset.song = song.toLowerCase();
+      row.dataset.artist = artist.toLowerCase();
+      row.innerHTML = `
+        <div>${escapeHtml(song)}</div>
+        <div><em>${escapeHtml(artist||"—")}</em></div>
+        <button class="iconBtn" title="No hay Spotify conectado">♪</button>
+      `;
+      table.appendChild(row);
+
+      document.getElementById("newSong").value = "";
+      document.getElementById("newArtist").value = "";
+      songStatus.textContent = "✅ Añadida (solo en tu navegador). Para que se guarde para todos, hay que conectar base de datos.";
+    });
+
+    // 6) Galería (preview local)
+    const drop = document.getElementById("dropZone");
+    const pick = document.getElementById("pickFile");
+    const input = document.getElementById("fileInput");
+    const thumbs = document.getElementById("thumbs");
+    const photoStatus = document.getElementById("photoStatus");
+
+    pick.addEventListener("click", ()=> input.click());
+
+    drop.addEventListener("dragover", (e)=>{ e.preventDefault(); drop.style.opacity = "0.85"; });
+    drop.addEventListener("dragleave", ()=>{ drop.style.opacity = "1"; });
+    drop.addEventListener("drop", (e)=>{
+      e.preventDefault();
+      drop.style.opacity = "1";
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if(file) preview(file);
+    });
+    input.addEventListener("change", ()=>{
+      const file = input.files && input.files[0];
+      if(file) preview(file);
+    });
+
+    function preview(file){
+      if(!file.type.startsWith("image/")){ photoStatus.textContent = "Solo imágenes."; return; }
+      if(file.size > 10*1024*1024){ photoStatus.textContent = "Máximo 10MB."; return; }
+      const url = URL.createObjectURL(file);
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = "Foto subida";
+      thumbs.prepend(img);
+      photoStatus.textContent = "✅ Foto cargada (vista previa). Pulsa “SUBIR FOTO” si luego conectamos servidor.";
+    }
+
+    document.getElementById("fakeUploadBtn").addEventListener("click", ()=>{
+      const n = document.getElementById("uploaderName").value.trim();
+      photoStatus.textContent = n ? `✅ Gracias, ${n}. (Falta conectar servidor para que se guarde.)`
+                                 : "✅ Gracias. (Falta conectar servidor para que se guarde.)";
+    });
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, (c)=>({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[c]));
+    }
+  </script>
 </body>
 </html>
