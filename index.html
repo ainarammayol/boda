@@ -15,8 +15,18 @@ body{
 }
 
 .hero{
-  padding:60px 20px;
-}
+    min-height:100vh;
+    padding:60px 20px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-shadow: 0 2px 6px rgba(0,0,0,.6);
+
 
 .names{
   font-size:40px;
@@ -52,7 +62,7 @@ body{
 
 <body>
 
-<div class="hero">
+<div class="hero" style="background-image:url('portada.png');">
   <h1 class="names" onclick="flipName()">Emilio & Estrella</h1>
   <p>30 Agosto 2026</p>
 </div>
