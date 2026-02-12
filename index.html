@@ -697,9 +697,15 @@
 
   </div>
 
-  <script>
-    // 1) Girar nombres (tap)
- namesEl.addEventListener("click", () => {
+<script>
+
+// Referencias primero
+const playerBox = document.getElementById("playerBox");
+const musicPlayer = document.getElementById("musicPlayer");
+const namesEl = document.getElementById("names");
+
+// 1) Girar nombres
+namesEl.addEventListener("click", () => {
   namesEl.classList.toggle("flip");
 });
 
