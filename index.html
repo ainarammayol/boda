@@ -245,23 +245,27 @@ body{
   position:relative;
   min-height:210px;
   transform-style:preserve-3d;
+  -webkit-transform-style:preserve-3d;
   transition:transform .65s;
   overflow:hidden;
 }
     .flipCard.is-flipped .flipInner{ transform: rotateY(180deg); }
-    .flipFace{
-      position:absolute; inset:0;
-      backface-visibility:hidden;
-      border:2px solid var(--wine2);
-      border-radius:var(--radius);
-      background:#fff;
-      padding:22px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:8px;
-    }
+  .flipFace{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;  /* <-- clave iPhone */
+  transform: translateZ(0);            /* <-- evita parpadeos */
+  border:2px solid var(--wine2);
+  border-radius:var(--radius);
+  background:#fff;
+  padding:22px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:8px;
+}
     .flipBack{ transform: rotateY(180deg); }
 
     /* RSVP */
