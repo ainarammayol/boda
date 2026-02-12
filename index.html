@@ -756,5 +756,46 @@
       window.open(link, "_blank", "noopener,noreferrer");
     });
   </script>
+  <script>
+// ===== RSVP -> Google Sheets =====
+
+const rsvpForm = document.getElementById("rsvpForm");
+const rsvpStatus = document.getElementById("rsvpStatus");
+
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwbidnrdsVNPHTS3WFXnSlOW3lOrbHHlHy4DDlXHcfZJXZCU67TW0N1QWo7nNcD-L9V/exec";
+
+rsvpForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    name: rsvpForm.elements["name"].value.trim(),
+    partner: rsvpForm.elements["partner"].value.trim(),
+    allergies: rsvpForm.elements["allergies"].value.trim(),
+    transport: rsvpForm.elements["transport"].value,
+    notes: rsvpForm.elements["notes"].value.trim()
+  };
+
+  rsvpStatus.textContent = "Enviando...";
+
+  try {
+    const res = await fetch(SHEET_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error("Error " + res.status);
+
+    rsvpStatus.textContent = "✅ Confirmado. ¡Gracias!";
+    rsvpForm.reset();
+
+  } catch (err) {
+    console.error(err);
+    rsvpStatus.textContent = "❌ Error al enviar. Inténtalo otra vez.";
+  }
+});
+</script>
 </body>
 </html>
