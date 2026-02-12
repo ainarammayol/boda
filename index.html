@@ -700,12 +700,19 @@
   <script>
     // 1) Girar nombres (tap)
     const namesEl = document.getElementById("names");
-    namesEl.addEventListener("click", () => namesEl.classList.toggle("flip"));
 
-    // 2) Flip cards (Dónde será)
-    document.querySelectorAll(".flipCard").forEach(card=>{
-      card.addEventListener("click", ()=> card.classList.toggle("is-flipped"));
-    });
+namesEl.addEventListener("click", () => {
+
+  // Flip visual
+  namesEl.classList.toggle("flip");
+
+  // Si ya está sonando, no reiniciar
+  if(musicPlayer.src) return;
+
+  // Tu canción (cambia el ID si quieres otra)
+  musicPlayer.src = "https://www.youtube.com/embed/aHxYwaZM-KA?autoplay=1";
+
+});
 
     // 3) RSVP (ahora mismo solo muestra OK; para guardar de verdad: Supabase)
     const rsvpForm = document.getElementById("rsvpForm");
