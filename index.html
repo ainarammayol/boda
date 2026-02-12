@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Boda</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#6b2434;
+  color:white;
+  text-align:center;
+}
+
+.hero{
+  padding:60px 20px;
+}
+
+.names{
+  font-size:40px;
+  cursor:pointer;
+  transition: transform 0.6s;
+}
+
+.flip{
+  transform: rotateY(180deg);
+}
+
+.section{
+  background:white;
+  color:#6b2434;
+  padding:40px 20px;
+}
+
+.card{
+  border:2px solid #6b2434;
+  border-radius:20px;
+  padding:20px;
+  margin:20px auto;
+  max-width:300px;
+  cursor:pointer;
+  transition: transform 0.6s;
+}
+
+.card.flip{
+  transform: rotateY(180deg);
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <h1 class="names" onclick="flipName()">Emilio & Estrella</h1>
+  <p>30 Agosto 2026</p>
+</div>
+
+<div class="section">
+  <h2>¿Dónde será?</h2>
+
+  <div class="card" onclick="flipCard(this)">
+    Iglesia San Nicolás<br>
+    12:00h
+  </div>
+
+  <div class="card" onclick="flipCard(this)">
+    Hacienda La Fuente<br>
+    13:30h
+  </div>
+</div>
+
+<script>
+function flipName(){
+  document.querySelector(".names").classList.toggle("flip");
+}
+
+function flipCard(card){
+  card.classList.toggle("flip");
+}
+</script>
+
+</body>
+</html>
