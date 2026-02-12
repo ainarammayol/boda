@@ -589,7 +589,7 @@
 
   </div>
 
-  <!-- API SoundCloud (va fuera de la sección) -->
+<!-- API SoundCloud (va fuera de la sección) -->
   <script src="https://w.soundcloud.com/player/api.js"></script>
 
   <script>
@@ -600,32 +600,30 @@
     }
 
     // 2) Flip cards (Dónde será)
-    document.querySelectorAll(".flipCard").forEach(card=>{
-      card.addEventListener("click", ()=> card.classList.toggle("is-flipped"));
+    document.querySelectorAll(".flipCard").forEach(card => {
+      card.addEventListener("click", () => card.classList.toggle("is-flipped"));
     });
-
-    
 
     // 4) Cuenta atrás (AJUSTA la fecha si quieres)
     const target = new Date("2026-03-07T12:00:00");
     const cd = document.getElementById("countdown");
-    function tick(){
+    function tick() {
       const now = new Date();
       let diff = target - now;
-      if(diff <= 0){ cd.textContent = "¡Hoy es el día!"; return; }
-      const d = Math.floor(diff / (1000*60*60*24));
-      diff -= d*(1000*60*60*24);
-      const h = Math.floor(diff / (1000*60*60));
-      diff -= h*(1000*60*60);
-      const m = Math.floor(diff / (1000*60));
+      if (diff <= 0) { cd.textContent = "¡Hoy es el día!"; return; }
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= d * (1000 * 60 * 60 * 24);
+      const h = Math.floor(diff / (1000 * 60 * 60));
+      diff -= h * (1000 * 60 * 60);
+      const m = Math.floor(diff / (1000 * 60));
       cd.textContent = `${d} d, ${h} h, ${m} m`;
     }
     if (cd) { tick(); setInterval(tick, 1000); }
 
     // Utilidad
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, (c)=>({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
       }[c]));
     }
 
@@ -633,10 +631,10 @@
     const addBtn = document.getElementById("addSongBtn");
     const songStatus = document.getElementById("songStatus");
     if (addBtn) {
-      addBtn.addEventListener("click", ()=>{
+      addBtn.addEventListener("click", () => {
         const song = document.getElementById("newSong").value.trim();
         const artist = document.getElementById("newArtist").value.trim();
-        if(!song){ songStatus.textContent = "Escribe una canción."; return; }
+        if (!song) { songStatus.textContent = "Escribe una canción."; return; }
 
         const table = document.getElementById("songTable");
         const row = document.createElement("div");
@@ -646,7 +644,7 @@
 
         row.innerHTML = `
           <div>${escapeHtml(song)}</div>
-          <div><em>${escapeHtml(artist||"—")}</em></div>
+          <div><em>${escapeHtml(artist || "—")}</em></div>
           <button class="iconBtn playBtn" type="button">▶</button>
         `;
         table.appendChild(row);
@@ -664,29 +662,29 @@
     const thumbs = document.getElementById("thumbs");
     const photoStatus = document.getElementById("photoStatus");
 
-    if (pick && input) pick.addEventListener("click", ()=> input.click());
+    if (pick && input) pick.addEventListener("click", () => input.click());
 
     if (drop) {
-      drop.addEventListener("dragover", (e)=>{ e.preventDefault(); drop.style.opacity = "0.85"; });
-      drop.addEventListener("dragleave", ()=>{ drop.style.opacity = "1"; });
-      drop.addEventListener("drop", (e)=>{
+      drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.style.opacity = "0.85"; });
+      drop.addEventListener("dragleave", () => { drop.style.opacity = "1"; });
+      drop.addEventListener("drop", (e) => {
         e.preventDefault();
         drop.style.opacity = "1";
         const file = e.dataTransfer.files && e.dataTransfer.files[0];
-        if(file) preview(file);
+        if (file) preview(file);
       });
     }
 
     if (input) {
-      input.addEventListener("change", ()=>{
+      input.addEventListener("change", () => {
         const file = input.files && input.files[0];
-        if(file) preview(file);
+        if (file) preview(file);
       });
     }
 
-    function preview(file){
-      if(!file.type.startsWith("image/")){ photoStatus.textContent = "Solo imágenes."; return; }
-      if(file.size > 10*1024*1024){ photoStatus.textContent = "Máximo 10MB."; return; }
+    function preview(file) {
+      if (!file.type.startsWith("image/")) { photoStatus.textContent = "Solo imágenes."; return; }
+      if (file.size > 10 * 1024 * 1024) { photoStatus.textContent = "Máximo 10MB."; return; }
       const url = URL.createObjectURL(file);
       const img = document.createElement("img");
       img.src = url;
@@ -697,10 +695,11 @@
 
     const fakeUploadBtn = document.getElementById("fakeUploadBtn");
     if (fakeUploadBtn) {
-      fakeUploadBtn.addEventListener("click", ()=>{
+      fakeUploadBtn.addEventListener("click", () => {
         const n = document.getElementById("uploaderName").value.trim();
-        photoStatus.textContent = n ? `✅ Gracias, ${n}. (Falta conectar servidor para que se guarde.)`
-                                   : "✅ Gracias. (Falta conectar servidor para que se guarde.)";
+        photoStatus.textContent = n
+          ? `✅ Gracias, ${n}. (Falta conectar servidor para que se guarde.)`
+          : "✅ Gracias. (Falta conectar servidor para que se guarde.)";
       });
     }
 
@@ -711,12 +710,12 @@
     let started = false;
     let widget = null;
 
-    function makeSoundCloudEmbed(trackUrl){
+    function makeSoundCloudEmbed(trackUrl) {
       return `https://w.soundcloud.com/player/?url=${encodeURIComponent(trackUrl)}&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&visual=false`;
     }
 
-    function startMusic(){
-      if(started) return;
+    function startMusic() {
+      if (started) return;
       started = true;
 
       const trackUrl = "https://soundcloud.com/robertmorr/robert-morr-x-aga-tenia-tanto-from-desire-2022-mashup-1";
@@ -724,7 +723,7 @@
       playerBox.style.display = "block";
 
       widget = SC.Widget(scFrame);
-      widget.bind(SC.Widget.Events.READY, function(){
+      widget.bind(SC.Widget.Events.READY, function () {
         widget.play();
       });
 
@@ -735,52 +734,54 @@
     document.addEventListener("click", startMusic);
     document.addEventListener("touchstart", startMusic);
 
-    // 8) Botón ▶ de la lista: abre el link en nueva pestaña (no embebemos YouTube/Spotify aquí)
-    document.addEventListener("click", (e)=>{
+    // 8) Botón ▶ de la lista: abre el link en nueva pestaña
+    document.addEventListener("click", (e) => {
       const btn = e.target.closest(".playBtn");
-      if(!btn) return;
+      if (!btn) return;
 
       const row = btn.closest(".songRow");
       const link = row?.dataset.link;
-      if(!link) return;
+      if (!link) return;
 
       window.open(link, "_blank", "noopener,noreferrer");
     });
-const rsvpForm = document.getElementById("rsvpForm");
-const rsvpStatus = document.getElementById("rsvpStatus");
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzldlIxcoOeS5S6Qpn3CMyw7IwvdxpuHda34JUSKZC99bKTIzsRJBPowcJyWvR8tB7U/exec";
+    // 9) RSVP -> Google Apps Script
+    const rsvpForm = document.getElementById("rsvpForm");
+    const rsvpStatus = document.getElementById("rsvpStatus");
 
-rsvpForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbzldlIxcoOeS5S6Qpn3CMyw7IwvdxpuHda34JUSKZC99bKTIzsRJBPowcJyWvR8tB7U/exec";
 
-  const payload = {
-    name: rsvpForm.elements["name"].value.trim(),
-    partner: rsvpForm.elements["partner"].value.trim(),
-    allergies: rsvpForm.elements["allergies"].value.trim(),
-    transport: rsvpForm.elements["transport"].value,
-    notes: rsvpForm.elements["notes"].value.trim()
-  };
+    if (rsvpForm && rsvpStatus) {
+      rsvpForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-  rsvpStatus.textContent = "Enviando...";
+        const payload = {
+          name: rsvpForm.elements["name"].value.trim(),
+          partner: rsvpForm.elements["partner"].value.trim(),
+          allergies: rsvpForm.elements["allergies"].value.trim(),
+          transport: rsvpForm.elements["transport"].value,
+          notes: rsvpForm.elements["notes"].value.trim()
+        };
 
-  try {
-    // no-cors = aunque el navegador bloquee la respuesta, el envío llega a Sheets
-    await fetch(SHEET_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    });
+        rsvpStatus.textContent = "Enviando...";
 
-    rsvpStatus.textContent = "✅ Confirmado. ¡Gracias!";
-    rsvpForm.reset();
-  } catch (err) {
-    console.error(err);
-    rsvpStatus.textContent = "❌ Error al enviar. Inténtalo otra vez.";
-  }
-});
-    <script>
+        try {
+          await fetch(SHEET_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload)
+          });
 
+          rsvpStatus.textContent = "✅ Confirmado. ¡Gracias!";
+          rsvpForm.reset();
+        } catch (err) {
+          console.error(err);
+          rsvpStatus.textContent = "❌ Error al enviar. Inténtalo otra vez.";
+        }
+      });
+    }
+  </script>
 </body>
 </html>
